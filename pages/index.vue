@@ -33,8 +33,45 @@ import Logo from '~/components/Logo.vue'
 import firebase from 'firebase'
 
 export default {
+  name: 'App',
   components: {
     Logo
+  },
+  asyncData() {
+    return {
+      authenticatedUser: null,
+      email: '',
+      password: '',
+      registrationPassword: '',
+      needsAccount: true
+    }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => (this.authenticatedUser = user))
+  },
+  methods: {
+    register() {
+      if(this.password === this.registrationPassword) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+      } else {
+        // display error message
+      }
+    },
+    login() {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+    },
+    loginOrRegister() {
+      if (this.needsAccount) {
+        this.register()
+      } else {
+        this.login
+      }
+    },
+    logout() {
+      firebase.auth().signOut()
+    }
   }
 }
 </script>
