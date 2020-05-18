@@ -16,7 +16,7 @@ export default {
     ],
     script: [
       {
-        src: 'https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js'
+        // src: 'https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js'
       }
     ]
   },
@@ -33,8 +33,14 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/firebase.js',
+    // '~/plugins/firebase.js',
   ],
+  /*
+  ** Router settings
+  */
+  router: {
+    middleware: ['authenticated']
+  },
   /*
   ** Nuxt.js dev-modules
   */
@@ -47,35 +53,35 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     // ...
-    '@nuxtjs/pwa',
-    '@nuxtjs/firebase'
+    // '@nuxtjs/pwa',
+    // '@nuxtjs/firebase'
   ],
-  firebase: {
-    // ...
-    services: {
-      auth: {
-        ssr: true
-      }
-      // ...
-    }
-  },
-  pwa: {
-    // disable the modules you don't need
-    meta: false,
-    icon: false,
-    // if you omit a module key form configuration sensible defaults will be applied
-    // manifest: false,
+  // firebase: {
+  //   // ...
+  //   services: {
+  //     auth: {
+  //       ssr: true
+  //     }
+  //     // ...
+  //   }
+  // },
+  // pwa: {
+  //   // disable the modules you don't need
+  //   meta: false,
+  //   icon: false,
+  //   // if you omit a module key form configuration sensible defaults will be applied
+  //   // manifest: false,
 
-    workbox: {
-      importScripts: [
-        // ...
-        '/firebase-auth-sw.js'
-      ],
-      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
-      // only set this true for testing and remember to always clear your browser cache in development
-      dev: false
-    }
-  },
+  //   workbox: {
+  //     importScripts: [
+  //       // ...
+  //       '/firebase-auth-sw.js'
+  //     ],
+  //     // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
+  //     // only set this true for testing and remember to always clear your browser cache in development
+  //     dev: false
+  //   }
+  // },
   /*
   ** Build configuration
   */
