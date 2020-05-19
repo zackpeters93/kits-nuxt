@@ -30,11 +30,54 @@
 
 <script>
 import Logo from '~/components/Logo.vue'
+import firebase from 'firebase'
+import { mapActions } from "vuex"
 
 export default {
   name: 'App',
   components: {
     Logo
+  },
+  asyncData() {
+    return {
+      authentication: null,
+      email: '',
+      password: '',
+      registrationPassword: '',
+      needsAccount: true
+    }
+  },
+  created() {
+    firebase.auth().onAuthStateChanged(user => (this.authenticatedUser = user))
+    this.loginUser()
+  },
+  methods: {
+    ...mapActions("users",["login"]),
+    register() {
+      if(this.password === this.registrationPassword) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+      } else {
+        // display error message
+      }
+    },
+    async loginUser() {
+      await this.login({
+        email: this.email,
+        password: this.password
+      })
+    },
+    loginOrRegister() {
+      if (this.needsAccount) {
+        this.register()
+      } else {
+        this.login
+      }
+    },
+    logout() {
+      firebase.auth().signOut()
+    }
   }
 }
 </script>

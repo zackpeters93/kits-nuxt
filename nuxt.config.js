@@ -33,7 +33,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    // '~/plugins/firebase.js',
+    '~/services/firebase.js',
+    { src: '~/plugins/localStorage.js', ssr: false },
   ],
   /*
   ** Router settings

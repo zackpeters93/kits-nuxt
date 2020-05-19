@@ -10,6 +10,7 @@
           <b-navbar-nav>
             <b-nav-item href="#">About</b-nav-item>
             <b-nav-item href="#">Resources <b-badge pill variant="success">New!</b-badge></b-nav-item>
+            <b-nav-item href="/admin/dashboard">Dashboard</b-nav-item>
           </b-navbar-nav>
 
           <!-- Right aligned nav items -->
@@ -29,7 +30,7 @@
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template v-slot:button-content>
-                <em>User: {{user.uid}}</em>
+                <em v-if="user">User: {{user.displayName}}</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="#">Sign Out</b-dropdown-item>
@@ -93,9 +94,10 @@ html {
 </style>
 
 <script>
-import firebaseApp from 'firebase/app';
-
+import { mapGetters } from "vuex"
 export default {
-  user: firebaseApp.auth().currentUser
+  computed:{
+    ...mapGetters("users",["user"]),
+  },
 }
 </script>

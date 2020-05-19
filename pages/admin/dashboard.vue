@@ -2,21 +2,26 @@
   <div class="container">
     <div>
       <logo />
-      <h1 class="title">
-        Dashboard
-      </h1>
+      <h1 class="title">Dashboard</h1>
+      <h4>User ID: {{user.uid}}</h4>
+      <h4>Name: {{user.displayName}}</h4>
+      <h4>Email: {{user.email}}</h4>
     </div>
   </div>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import { mapGetters } from "vuex"
 
 export default {
-    layout: 'dark',
+  layout: 'default',
   components: {
     Logo
-  }
+  },
+  computed:{
+    ...mapGetters("users", ["user"]),
+  },
 }
 </script>
 
